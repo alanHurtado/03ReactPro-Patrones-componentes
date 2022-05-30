@@ -9,7 +9,7 @@ import { ProductContextProps, Props } from '../interfaces/interfaces';
 export const ProductContext = createContext({} as ProductContextProps);
 const { Provider } = ProductContext;
 
-export const ProducCard = ({ product, children }: Props) => {
+export const ProducCard = ({ product, children, className, style}: Props) => {
   const { counter, increaseBy } = useProduct();
   return (
     <Provider
@@ -19,7 +19,7 @@ export const ProducCard = ({ product, children }: Props) => {
         product,
       }}
     >
-      <div className={styles.productCard}>
+      <div className={`${styles.productCard} ${className} `} style={style}>
         {children}
         {/* <ProductImage img={img} />
       <ProductTitle title={title} />
