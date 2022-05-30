@@ -1,13 +1,14 @@
 import { CSSProperties, ReactNode } from "react";
 import { PropsImage } from "../components/ProductImage";
-import { PropsTitle } from '../components/ProductTitle';
-import { PropsBottons } from '../components/ProductBottons';
+import { PropsTitle } from "../components/ProductTitle";
+import { PropsBottons } from "../components/ProductBottons";
 
 export type Props = {
   children: ReactNode;
   className?: string;
-  style?:  CSSProperties;
+  style?: CSSProperties;
   product: Product;
+  onChange?: (args: onChangeArgs)=> void;
 };
 
 export interface Product {
@@ -24,7 +25,12 @@ export interface ProductContextProps {
 
 export interface ProducCardHOCProps {
   ({ product, children }: Props): JSX.Element;
-  Title: ( Props : PropsTitle) => JSX.Element;
+  Title: (Props: PropsTitle) => JSX.Element;
   Image: (Props: PropsImage) => JSX.Element;
   Bottons: (Props: PropsBottons) => JSX.Element;
+}
+
+export interface onChangeArgs {
+  product: Product;
+  count: number;
 }
