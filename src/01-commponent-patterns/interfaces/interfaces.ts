@@ -3,13 +3,20 @@ import { PropsImage } from "../components/ProductImage";
 import { PropsTitle } from "../components/ProductTitle";
 import { PropsBottons } from "../components/ProductBottons";
 
-export type Props = {
-  children: ReactNode;
+
+export interface Props  {
+  children: (args: ProductCardHandlers) => ReactNode;
   className?: string;
   style?: CSSProperties;
   product: Product;
-  onChange?: (args: onChangeArgs)=> void;
+  onChange?: (args: onChangeArgs) => void;
   value?: number;
+  initialValues?: InitialValues;
+};
+
+export interface InitialValues {
+  count?: number;
+  maxCount?: number;
 };
 
 export interface Product {
@@ -23,6 +30,7 @@ export interface ProductContextProps {
   increaseBy: (value: number) => void;
   product: Product;
   value?: number;
+  maxCount?: number
 }
 
 export interface ProducCardHOCProps {
@@ -35,4 +43,14 @@ export interface ProducCardHOCProps {
 export interface onChangeArgs {
   product: Product;
   count: number;
+}
+
+
+export interface ProductCardHandlers {
+  count: number,
+  isMaxCountReached: boolean,
+  maxCount?: number,
+  product: Product,
+  increaseBy: (value: number) => void;
+  reset: () =>void,
 }

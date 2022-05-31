@@ -6,35 +6,34 @@ interface ProductInCart extends Product {
   }
   
 
-export const useShoppingCart = (product: Product[]) => {
+  export const useShoppingCart = () => {
 
-    const [shoppingCart, setShoppingCart] = useState<{ [key: string]: ProductInCart; }>({});
-    
-      const onProductCountChange = ({count, product, }: {count: number; product: Product; }) => {
-        setShoppingCart((oldShopingCart) => {
-          const productIncart: ProductInCart = oldShopingCart[product.id] || {
-            ...product,
-            count: 0,
-          };
-    
-          if (Math.max(productIncart.count + count, 0) > 0) {
-            productIncart.count += count;
+    const [ shoppingCart, setShoppingCart ] = useState<{ [key:string]: ProductInCart  }>({});
+
+    const onProductCountChange = ({ count, product }: { count:number, product: Product }) => {
+        
+        console.log({ count })
+
+        setShoppingCart( oldShoppingCart => {
+
+            if( count === 0 ) {
+                const {  [product.id]: toDelete, ...rest  } = oldShoppingCart;
+                return rest;
+            }
+
             return {
-              ...oldShopingCart,
-              [product.id]: productIncart,
-            };
-          }
-    
-          const { [product.id]: toDelete, ...rest } = oldShopingCart; //Eliminar objetos en count 0
-          return {
-            ...rest,
-          };
-        });
-      };
-  return {
-      shoppingCart,
-      onProductCountChange,
-  };
-};
+                ...oldShoppingCart,
+                [ product.id ]: { ...product, count }
+            }
+        })
+
+    }
+
+    return {
+        shoppingCart,
+        onProductCountChange,
+    }
+
+}
 
 
