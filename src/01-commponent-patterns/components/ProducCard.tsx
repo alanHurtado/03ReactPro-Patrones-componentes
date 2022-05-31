@@ -9,9 +9,9 @@ import { ProductContextProps, Props } from '../interfaces/interfaces';
 export const ProductContext = createContext({} as ProductContextProps);
 const { Provider } = ProductContext;
 
-export const ProducCard = ({ product, children, className, style, onChange }: Props) => {
+export const ProducCard = ({ product, children, className, style,  onChange, value }: Props) => {
   
-  const { counter, increaseBy } = useProduct({onChange, product});
+  const { counter, increaseBy } = useProduct({ onChange, product, value});
   
   return (
     <Provider

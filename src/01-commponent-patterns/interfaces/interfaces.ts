@@ -9,6 +9,7 @@ export type Props = {
   style?: CSSProperties;
   product: Product;
   onChange?: (args: onChangeArgs)=> void;
+  value?: number;
 };
 
 export interface Product {
@@ -21,6 +22,7 @@ export interface ProductContextProps {
   counter: number;
   increaseBy: (value: number) => void;
   product: Product;
+  value?: number;
 }
 
 export interface ProducCardHOCProps {
